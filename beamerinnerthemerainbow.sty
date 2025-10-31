@@ -1,5 +1,6 @@
 \RequirePackage{fontawesome5}
 \RequirePackage{mdframed}
+\RequirePackage{relsize}
 
 %% Items/enumerates/descriptions
 \setbeamertemplate{itemize item}{\usebeamerfont{itemize item}\usebeamercolor[fg]{itemize item}$\ast$}
@@ -26,7 +27,7 @@
 	{\usebeamercolor*[fg]{#1}}
 	\actionenv#4%
 	\mdleftrule[linecolor={#1.fg}, backgroundcolor={#1.fg!8!white}]%
-	\def\insertblocktitle{\raisebox{1pt}{\scriptsize\blockicon}\ #2}%
+	\def\insertblocktitle{\raisebox{1pt}{\smaller[2]\blockicon}\ #2}%
 	\usebeamertemplate{#3 begin}}
 {%
 	\usebeamertemplate{\internal@block@argthree@end}%

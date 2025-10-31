@@ -1,24 +1,15 @@
 \RequirePackage{iftex}
 \RequirePackage{fontawesome5}
 \RequirePackage{relsize}
+\RequirePackage{xstring}
 
 \newif\ifrainbow@fonthasoptions%
-% \newcommand*\rainbow@checkfonth@soptionstrue[2][]{%
-% 	\rainbow@fonthasoptionstrue%
-% }
-% \newcommand*\rainbow@checkfonth@soptionsfalse[1]{%
-% 	\rainbow@fonthasoptionsfalse%
-% }
 \newcommand*\rainbow@checkfonthasoptions[1]{%
-\message{#1}%
 \IfBeginWith{#1}{[}{%
 \rainbow@fonthasoptionstrue%
 }{%
 \rainbow@fonthasoptionsfalse%
-}
-% \expandafter\@ifnextchar\expandafter[%
-% \expandafter\rainbow@checkfonth@soptionstrue%
-% \expandafter\rainbow@checkfonth@soptionsfalse#1%
+}%
 }
 
 \ifPDFTeX%
@@ -142,17 +133,14 @@
 \setbeamerfont*{subsection in toc}{parent=structure}
 
 \setbeamerfont*{itemize item}{parent=structure, series=\bfseries\boldmath}
-\setbeamerfont*{enumerate item}{parent=structure, series=\bfseries\boldmath}
+\setbeamerfont*{enumerate item}{parent=itemize item}
 
-\setbeamerfont*{block title}{family=\rmfamily, size=\normalsize}
-\setbeamerfont*{block title example}{family=\rmfamily, size=\normalsize}
-\setbeamerfont*{block title alerted}{family=\rmfamily, size=\normalsize}
-\setbeamerfont*{block body}{size=\small}
-\setbeamerfont*{block body example}{size=\small}
-\setbeamerfont*{block body alerted}{size=\small}
-
-\setbeamerfont*{itemize item}{parent=structure, series=\bfseries\boldmath}
-\setbeamerfont*{enumerate item}{parent=structure, series=\bfseries\boldmath}
+\setbeamerfont*{block title}{family=\rmfamily, size=\large}
+\setbeamerfont*{block title example}{parent=block title}
+\setbeamerfont*{block title alerted}{parent=block title}
+\setbeamerfont*{block body}{size=\normalsize}
+\setbeamerfont*{block body example}{parent=block body}
+\setbeamerfont*{block body alerted}{parent=block body}
 
 \setbeamerfont*{qed symbol}{size=\footnotesize, series=\boldmath}
 
