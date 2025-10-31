@@ -42,4 +42,6 @@ A pre-compiled (by CI) `.pdf` file can also be found on [the release page](https
 
   Note that you do not necessarily have to set each. 
   You may choose individual aspects to customize (e.g. only the monospace font).
+
+  For more complex customization of fonts (e.g. specifying a bold font to be used), you may pass values of the form`[fontspec-options...]{...}` (necessarily surrounded by braces `{}`).
 - `withappendix[=true|false]` (default = `false`) redefines the `\appendix` command to automatically number the appendix frames with letters instead of numbers, and removes them from the total frame count.

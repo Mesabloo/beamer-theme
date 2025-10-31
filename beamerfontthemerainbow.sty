@@ -2,10 +2,27 @@
 \RequirePackage{fontawesome5}
 \RequirePackage{relsize}
 
+\newif\ifrainbow@fonthasoptions%
+% \newcommand*\rainbow@checkfonth@soptionstrue[2][]{%
+% 	\rainbow@fonthasoptionstrue%
+% }
+% \newcommand*\rainbow@checkfonth@soptionsfalse[1]{%
+% 	\rainbow@fonthasoptionsfalse%
+% }
+\newcommand*\rainbow@checkfonthasoptions[1]{%
+\message{#1}%
+\IfBeginWith{#1}{[}{%
+\rainbow@fonthasoptionstrue%
+}{%
+\rainbow@fonthasoptionsfalse%
+}
+% \expandafter\@ifnextchar\expandafter[%
+% \expandafter\rainbow@checkfonth@soptionstrue%
+% \expandafter\rainbow@checkfonth@soptionsfalse#1%
+}
+
 \ifPDFTeX%
-	\PackageError{rainbow}%
-	{PDFTeX is unsupported (at least for now) since our template needs to load some fonts.}%
-	{}
+	\PackageError{rainbow}{PDFTeX is unsupported (at least for now) since our template needs to load some fonts.}{}
 \else%
 	\RequirePackage[
 		warnings-off={mathtools-colon,mathtools-overbracket}
@@ -32,7 +49,12 @@
 				}
 		]{YanoneKaffeesatz-VariableFont_wght.ttf}
 	}{%
-		\setmainfont{\rainbow@fonts@main}
+		\rainbow@checkfonthasoptions{\rainbow@fonts@main}%
+		\ifrainbow@fonthasoptions%
+			\expandafter\setmainfont\rainbow@fonts@main%
+		\else%
+			\setmainfont{\rainbow@fonts@main}%
+		\fi%
 	}
 
 	\IfStrEq{\rainbow@fonts@sans}{\@empty}{%
@@ -53,7 +75,12 @@
 			]{Andika}
 		}
 	}{%
-		\setsansfont{\rainbow@fonts@sans}
+		\rainbow@checkfonthasoptions{\rainbow@fonts@sans}%
+		\ifrainbow@fonthasoptions%
+			\expandafter\setsansfont\rainbow@fonts@sans%
+		\else%
+			\setsansfont{\rainbow@fonts@sans}%
+		\fi%
 	}
 
 	\IfStrEq{\rainbow@fonts@mono}{\@empty}{%
@@ -67,7 +94,12 @@
 			BoldItalicFont = *-BoldItalic
 		]{IosevkaCustom}
 	}{%
-		\setmonofont{\rainbow@fonts@mono}
+		\rainbow@checkfonthasoptions{\rainbow@fonts@mono}%
+		\ifrainbow@fonthasoptions%
+			\expandafter\setmonofont\rainbow@fonts@mono%
+		\else%
+			\setmonofont{\rainbow@fonts@mono}%
+		\fi%
 	}
 
 	\IfStrEq{\rainbow@fonts@math}{\@empty}{%
@@ -85,7 +117,12 @@
 			]{LeteSansMath.otf}
 		}
 	}{%
-		\setmathfont{\rainbow@fonts@math}%
+		\rainbow@checkfonthasoptions{\rainbow@fonts@math}%
+		\ifrainbow@fonthasoptions%
+			\expandafter\setmathfont\rainbow@fonts@math%
+		\else%
+			\setmathfont{\rainbow@fonts@math}%
+		\fi%
 	}
 \fi
 
