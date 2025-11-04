@@ -37,9 +37,14 @@
 	\setbox\internal@authorinstbox\hbox to \linewidth{\vbox to 8ex{%
 				\vfil%
 				\begin{minipage}{.6\linewidth}%
-					\vbox to 1.2ex{\usebeamerfont*{author}\usebeamercolor*[fg]{author}\insertauthor}%
+					% \vfil%
+					\usebeamerfont*{author}\usebeamercolor*[fg]{author}\insertauthor%
+					% \vfil\null%
 				\end{minipage}\hfill\begin{minipage}{.25\linewidth}%
-					\vbox to 1.2ex{\vfil\usebeamerfont*{author}\usebeamercolor*[fg]{author}\begin{flushright}\insertinstitute\end{flushright}\vfil\null}%
+					% \vfil%
+					\usebeamerfont*{author}\usebeamercolor*[fg]{author}%
+					\begin{flushright}\insertinstitute\end{flushright}%
+					% \vfil\null%
 				\end{minipage}%
 				\vfil\null%
 			}}%
@@ -54,6 +59,7 @@
 	\tikz{%
 		\shade[shading=rainbow, shading angle=-90] (0, 0) rectangle (\linewidth, 2pt);
 	}\par%
+	% \vspace*{1.3ex}%
 	\box\internal@authorinstbox\par%
 	\vspace*{1ex}%
 	\box\internal@datebox\par%
