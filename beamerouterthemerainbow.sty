@@ -142,3 +142,23 @@
 		\hspace*{1.5mm}%
 	\end{beamercolorbox}%
 }
+
+\setbeamertemplate{part page}{%
+	\vfil%
+	\centering%
+	\begin{minipage}{.8\linewidth}%
+		\centering%
+		\begingroup%
+		\vspace*{5ex}%
+		\usebeamercolor*{part name}%
+		\usebeamerfont*{part name}%
+		\insertpart%
+		\endgroup%
+		\par\par%
+		\tikz{%
+			\clip (0, 0) rectangle (\linewidth, 1.4*\progressbarht);
+			\shade[shading=rainbow, shading angle=-90] (0, 0) rectangle (\linewidth, 1.4*\progressbarht);
+		}%
+	\end{minipage}%
+	\vfil\null%
+}

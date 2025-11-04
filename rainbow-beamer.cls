@@ -109,6 +109,9 @@
 \fi
 
 
+\AtBeginPart{\frame[plain,noframenumbering]{\partpage}}
+
+
 \ifrainbow@withappendix
 	\RequirePackage{appendixnumberbeamer}%
 
@@ -117,6 +120,8 @@
 		\rainbow@oldappendix%
 		\renewcommand{\insertframenumber}{\Alph{framenumber}}%
 		\renewcommand{\theframenumber}{\Alph{framenumber}}%
+		% \part{\appendixname}%
+		\section*{\appendixname}%
 	}%
 \else
 	\def\appendix{\ClassError{rainbow}{Appendices not supported without the `withappendix' option}{Please add the `withappendix' option to the class}}
