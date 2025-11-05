@@ -182,6 +182,12 @@
 		}{\end{sframe}
 }
 
+\let\rainbow@oldagainframe\againframe%
+\newcommand<>\rainbow@againframe[2][]{%
+	\rainbow@oldagainframe#3[noframenumbering,#1]{#2}%
+}
+\renewcommand\againframe{\@ifstar\rainbow@oldagainframe\rainbow@againframe}
+
 
 %%%% Various buttons
 
