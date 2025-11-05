@@ -178,8 +178,8 @@
 		}{\end{frame}}
 
 \newenvironment<>{sframe*}[1][]{%
-	\begin{sframe}#2[#1]
-		}{\end{sframe}\addtocounter{framenumber}{-1}%
+	\begin{sframe}#2[noframenumbering,#1]
+		}{\end{sframe}
 }
 
 
