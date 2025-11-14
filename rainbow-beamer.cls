@@ -21,6 +21,7 @@
 \newif\ifrainbow@debug
 \newif\ifrainbow@nofonts
 \newif\ifrainbow@withappendix
+\newif\ifrainbow@handout
 \let\rainbow@fonts@main\@empty
 \let\rainbow@fonts@sans\@empty
 \let\rainbow@fonts@mono\@empty
@@ -63,6 +64,9 @@
 	withappendix/.is if=rainbow@withappendix,
 	withappendix/.initial=false,
 	%
+	handout/.is if=rainbow@handout,
+	handout/.initial=false,
+	%
 	% Give other options to beamer, but remove some
 	.unknown/.code={%
 			\PassOptionsToClass{\pgfkeyscurrentkey}{beamer}%
@@ -71,11 +75,13 @@
 
 \ProcessPgfOptions{/rainbow}
 
+\edef\rainbow@beamerargs{aspectratio=169,noamssymb}
+\ifrainbow@handout%
+	\edef\rainbow@beamerargs{\rainbow@beamerargs,handout}
+\fi
+
 %% Load class
-\LoadClass[
-	aspectratio=169,
-	noamssymb
-]{beamer}
+\LoadClass[\rainbow@beamerargs]{beamer}
 
 
 
@@ -89,6 +95,7 @@
 	\rainbow@has@listingstrue
 	\RequirePackage{listings-rainbow}
 }
+
 
 % Insert our title frame at the very beginning of the document
 \AtBeginDocument{\begin{frame}[plain,noframenumbering]\maketitle\end{frame}}
@@ -117,6 +124,7 @@
 
 	\let\rainbow@oldappendix\appendix%
 	\renewcommand\appendix{%
+		\mode<handout:0>\relax%
 		\rainbow@oldappendix%
 		\renewcommand{\insertframenumber}{\Alph{framenumber}}%
 		\renewcommand{\theframenumber}{\Alph{framenumber}}%
@@ -165,6 +173,7 @@
 \AtBeginSection{%
 	\renewcommand{\subsecname}{}%
 }
+
 
 % TODO: why can't we just redefine the `frame` environment?
 \renewenvironment<>{sframe}[1][]{%
