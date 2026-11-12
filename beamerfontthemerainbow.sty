@@ -6,9 +6,9 @@
 \newif\ifrainbow@fonthasoptions%
 \newcommand*\rainbow@checkfonthasoptions[1]{%
 \IfBeginWith{#1}{[}{%
-\rainbow@fonthasoptionstrue%
+	\rainbow@fonthasoptionstrue%
 }{%
-\rainbow@fonthasoptionsfalse%
+	\rainbow@fonthasoptionsfalse%
 }%
 }
 
@@ -82,7 +82,8 @@
 			UprightFont    = *-Regular,
 			ItalicFont     = *-Italic,
 			BoldFont       = *-Bold,
-			BoldItalicFont = *-BoldItalic
+			BoldItalicFont = *-BoldItalic,
+			Scale          = .8
 		]{IosevkaCustom}
 	}{%
 		\rainbow@checkfonthasoptions{\rainbow@fonts@mono}%

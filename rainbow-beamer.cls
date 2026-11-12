@@ -22,6 +22,8 @@
 \newif\ifrainbow@nofonts
 \newif\ifrainbow@withappendix
 \newif\ifrainbow@handout
+\newif\ifrainbow@withtotalpages
+\let\rainbow@aspectratio\@empty
 \let\rainbow@fonts@main\@empty
 \let\rainbow@fonts@sans\@empty
 \let\rainbow@fonts@mono\@empty
@@ -63,9 +65,18 @@
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	withappendix/.is if=rainbow@withappendix,
 	withappendix/.initial=false,
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% Should the total frame count be
+	% written in the footer?
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	withtotalpages/.is if=rainbow@withtotalpages,
+	withtotalpages/.initial=false,
 	%
 	handout/.is if=rainbow@handout,
 	handout/.initial=false,
+	%
+	aspectratio/.store in=\rainbow@aspectratio,
+	aspectratio/.initial=\@empty,
 	%
 	% Give other options to beamer, but remove some
 	.unknown/.code={%
@@ -75,10 +86,11 @@
 
 \ProcessPgfOptions{/rainbow}
 
-\edef\rainbow@beamerargs{aspectratio=169,noamssymb}
-\ifrainbow@handout%
-	\edef\rainbow@beamerargs{\rainbow@beamerargs,handout}
-\fi
+\edef\rainbow@beamerargs{%
+	noamssymb,%
+	aspectratio=\ifx\rainbow@aspectratio\@empty 169\else\rainbow@aspectratio\fi,%
+	\ifrainbow@handout handout\fi%
+}
 
 %% Load class
 \LoadClass[\rainbow@beamerargs]{beamer}
@@ -128,6 +140,7 @@
 		\rainbow@oldappendix%
 		\renewcommand{\insertframenumber}{\Alph{framenumber}}%
 		\renewcommand{\theframenumber}{\Alph{framenumber}}%
+    \rainbow@withtotalpagesfalse%
 		% \part{\appendixname}%
 		\section*{\appendixname}%
 	}%
@@ -177,19 +190,19 @@
 
 % TODO: why can't we just redefine the `frame` environment?
 \renewenvironment<>{sframe}[1][]{%
-	\begin{frame}#2[environment=sframe,#1]
+		\begin{frame}#2[environment=sframe,#1]
 		\expandafter\ifx\relax\secname\relax\else%
 			\frametitle{\secname}%
 		\fi%
 		\expandafter\ifx\relax\subsecname\relax\else%
 			\framesubtitle{\subsecname}%
 		\fi%
-		}{\end{frame}}
+	}{\end{frame}}
 
 \newenvironment<>{sframe*}[1][]{%
-	\begin{sframe}#2[noframenumbering,#1]
-		}{\end{sframe}
-}
+		\begin{sframe}#2[noframenumbering,#1]
+	}{\end{sframe}
+	}
 
 \let\rainbow@oldagainframe\againframe%
 \newcommand<>\rainbow@againframe[2][]{%

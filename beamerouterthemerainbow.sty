@@ -131,7 +131,12 @@
 		%
 		\setbox\internal@authorbox\vbox to 1.5ex{\vfil\hbox to .28\paperwidth{\hfil\insertshortauthor\hfil}\vfil}%
 		\setbox\internal@titlebox\vbox to 1.5ex{\vfil\hbox{\insertshorttitle}\vfil}%
-		\setbox\internal@pagebox\vbox to 1.5ex{\vfil\hbox to 2em{\hfil\insertframenumber\hfil}\vfil}%
+		\setbox\internal@pagebox\vbox to 1.5ex{\vfil%
+      \ifrainbow@withtotalpages%
+        \hbox to 4em{\hfil\insertframenumber/\inserttotalframenumber\hfil}%
+      \else%
+        \hbox to 2em{\hfil\insertframenumber\hfil}%
+      \fi\vfil}%
 		%
 		% \hspace*{1mm}%
 		\box\internal@authorbox%
