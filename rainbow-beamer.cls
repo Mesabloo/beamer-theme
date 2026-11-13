@@ -140,7 +140,7 @@
 		\rainbow@oldappendix%
 		\renewcommand{\insertframenumber}{\Alph{framenumber}}%
 		\renewcommand{\theframenumber}{\Alph{framenumber}}%
-    \rainbow@withtotalpagesfalse%
+		\rainbow@withtotalpagesfalse%
 		% \part{\appendixname}%
 		\section*{\appendixname}%
 	}%

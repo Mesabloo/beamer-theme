@@ -47,3 +47,4 @@ A pre-compiled (by CI) `.pdf` file can also be found on [the release page](https
 - `withappendix[=true|false]` (default = `false`) redefines the `\appendix` command to automatically number the appendix frames with letters instead of numbers, and removes them from the total frame count.
 - `withtotalpages[=true|false]` (default = `false`) enables showing the total frame count in the footer in the main body of the slides.
   The total appendix count however is never shown even with `withappendix` set to `true`.
+  The progress bar is fixed to the full width of the slides when `withtotalpages` is set to `true`, in order to avoid redundant information.

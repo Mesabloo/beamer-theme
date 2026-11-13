@@ -89,15 +89,19 @@
 	\setbox\internal@titlebox\vbox to 1.8em{\vfil\hbox{\hspace*{2.5mm}\usebeamerfont{frametitle}\strut\insertframetitle}\vfil}%
 	\setbox\internal@subtitlebox\vbox to 1.8em{\vfil\hbox{\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\strut\insertframesubtitle\hspace*{3mm}}\vfil}%
 	\setbox\internal@pagecountbox\vbox to \progressbarht{\hbox to \paperwidth{%
-			\IfInteger{\insertframenumber}{%
-				\ifnum\insertframenumber0>0%
-					\setlength{\progressbarwd}{\dimexpr(\paperwidth*\insertframenumber/\inserttotalframenumber)}%
-				\else%
-					\setlength{\progressbarwd}{\paperwidth}%
-				\fi%
-			}{%
+			\ifrainbow@withtotalpages%
 				\setlength{\progressbarwd}{\paperwidth}%
-			}%
+			\else%
+				\IfInteger{\insertframenumber}{%
+					\ifnum\insertframenumber0>0%
+						\setlength{\progressbarwd}{\dimexpr(\paperwidth*\insertframenumber/\inserttotalframenumber)}%
+					\else%
+						\setlength{\progressbarwd}{\paperwidth}%
+					\fi%
+				}{%
+					\setlength{\progressbarwd}{\paperwidth}%
+				}%
+			\fi%
 			\tikz{%
 				\clip (0, 0) rectangle (\progressbarwd, \progressbarht);
 				\shade[shading=rainbow, shading angle=-90] (0, 0) rectangle (\paperwidth, \progressbarht);
@@ -132,11 +136,11 @@
 		\setbox\internal@authorbox\vbox to 1.5ex{\vfil\hbox to .28\paperwidth{\hfil\insertshortauthor\hfil}\vfil}%
 		\setbox\internal@titlebox\vbox to 1.5ex{\vfil\hbox{\insertshorttitle}\vfil}%
 		\setbox\internal@pagebox\vbox to 1.5ex{\vfil%
-      \ifrainbow@withtotalpages%
-        \hbox to 4em{\hfil\insertframenumber/\inserttotalframenumber\hfil}%
-      \else%
-        \hbox to 2em{\hfil\insertframenumber\hfil}%
-      \fi\vfil}%
+				\ifrainbow@withtotalpages%
+					\hbox to 4em{\hfil\insertframenumber/\inserttotalframenumber\hfil}%
+				\else%
+					\hbox to 2em{\hfil\insertframenumber\hfil}%
+				\fi\vfil}%
 		%
 		% \hspace*{1mm}%
 		\box\internal@authorbox%
